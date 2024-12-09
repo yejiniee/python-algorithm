@@ -1,0 +1,5 @@
+-- 2랑 비트연산해서 2랑 같으면 2가 포함된거임
+SELECT COUNT(*) AS COUNT
+FROM ECOLI_DATA 
+WHERE (GENOTYPE & 2) !=2
+AND ((GENOTYPE & 4) = 4 OR (GENOTYPE & 1) = 1);
