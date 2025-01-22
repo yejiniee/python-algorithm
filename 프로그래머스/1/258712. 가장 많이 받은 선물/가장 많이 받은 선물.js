@@ -4,22 +4,22 @@ function solution(friends, gifts) {
     const nextGiftsCount=Array(friends_length).fill(0); // 다음 달 받을 선물 배열
     const giftsScore=Array(friends_length).fill(0); // 선물지수 배열
     
+    // 검색속도 향상하기 위해 친구의 이름과 인덱스를 매핑
+    const friendsIndex = new Map();
+    for (let i = 0; i < friends_length; i++) {
+        friendsIndex.set(friends[i], i);
+    }
+    
     // 해시맵 저장하고 선물지수 저장함
     for(let i=0 ; i< gifts.length ; i++){
-        if(!hashMap.has(gifts[i])){
-            // 없으면 추가
-            hashMap.set(gifts[i], 1);
-        }else{
-            // 있으면 +1
-            hashMap.set(gifts[i], hashMap.get(gifts[i]) + 1);
-        }
+        const [giver, receiver] = gifts[i].split(' ');
+        
+        hashMap.set(gifts[i], (hashMap.get(gifts[i]) ?? 0) + 1);
+        
         // 선물지수: 준 선물-받은 선물
-        giftsScore[friends.indexOf(gifts[i].split(' ')[0])]+=1; 
-        giftsScore[friends.indexOf(gifts[i].split(' ')[1])]-=1; 
-        
-        
+        giftsScore[friends.indexOf(giver)]+=1; 
+        giftsScore[friends.indexOf(receiver)]-=1; 
     }
-
     
     // 다음 달 받을 선물 수 저장
     for(let i=0 ; i<friends_length-1 ; i++){
@@ -30,13 +30,12 @@ function solution(friends, gifts) {
             let aToB = a+' '+b; 
             let bToA = b+' '+a; 
             
+            const aToBValue=hashMap.get(aToB) ?? 0;
+            const bToAValue=hashMap.get(bToA) ?? 0;
+            
             // 선물을 주고받은 경우
             if(hashMap.has(aToB)||hashMap.has(bToA)){
-                const aToBValue=hashMap.get(aToB) ?? 0;
-                const bToAValue=hashMap.get(bToA) ?? 0;
-                
                 if(aToBValue>bToAValue) { // 2> 1
-                    
                     // a의 다음달 선물 수 +1
                     nextGiftsCount[i] += 1; 
                 } else if(aToBValue<bToAValue){
