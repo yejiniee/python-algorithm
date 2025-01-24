@@ -1,6 +1,8 @@
 function countNumberOfOne(n){
-        return n.toString(2).split('').filter((number)=>number==='1').length;
-    }
+    // return n.toString(2).split('').filter((number)=>number==='1').length;
+    return n.toString(2).match(/1/g).length;
+    
+}
 
 function solution(n) {
     // 1. n을 2진수 배열로 변환
@@ -17,3 +19,5 @@ function solution(n) {
     }
 }
     
+
+
