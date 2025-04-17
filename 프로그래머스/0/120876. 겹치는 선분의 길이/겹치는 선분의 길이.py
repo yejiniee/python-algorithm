@@ -1,9 +1,6 @@
 def solution(lines):
-    points = [0]*201 
+    s1 = set(i for i in range(lines[0][0], lines[0][1]))
+    s2 = set(i for i in range(lines[1][0], lines[1][1]))
+    s3 = set(i for i in range(lines[2][0], lines[2][1]))
+    return len((s1 & s2) | (s2 & s3) | (s1 & s3))
     
-    # 암묵적 구조 분해 할당
-    for x, y in lines:
-        for i in range(x,y):
-            points[i+100]+=1
-    
-    return sum(1 for p in points if p>=2)
