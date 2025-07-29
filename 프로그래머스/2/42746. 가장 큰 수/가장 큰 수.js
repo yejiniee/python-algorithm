@@ -1,15 +1,10 @@
 function solution(numbers) {
-    let answer = numbers.sort((a, b) => `${b}${a}` - `${a}${b}`).join('');
-    return answer[0] === '0' ? '0' : answer;
-}
-
-// 위의 코드가 더 성능적으로 비효율
-
-function solution(numbers) {
-    const answer = numbers
-        .map(number=>String(number))
-        .sort((a,b)=>(b+a)-(a+b))
-        .join('');
+    // 만약 00000이면 0으로 출력
     
+    // 내림차순으로 정렬
+    // ba가 ab보다 크면(결과값 양수)=> ba 정렬
+    // 결과값이 음수면 ab 정렬
+    let answer = numbers.sort((a,b)=>`${b}${a}`-`${a}${b}`).join('');
+
     return answer[0] === '0' ? '0' : answer;
 }
