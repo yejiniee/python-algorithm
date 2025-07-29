@@ -1,14 +1,13 @@
 function solution(array, commands) {
-    var answer = [];
-    array.unshift(0);
+    const answer=[];
     
-    commands.forEach((command, index)=>{
-        let i = command[0];
-        let j = command[1];
-        let k = command[2]-1;
-        
-        const newArray=array.slice(i, j+1).sort((a,b)=>a-b);
-        answer.push(newArray[k]);
-    })
+    for(let idx = 0; idx < commands.length ; idx++){
+        const [i,j,k] = commands[idx];
+        const newArray = array.slice(i-1,j); // i번째부터 j번째까지 슬라이스
+        newArray.sort((a,b)=>a-b); // 오름차순 정렬
+        answer.push(newArray[k-1]);
+    }
+    
+    
     return answer;
 }
