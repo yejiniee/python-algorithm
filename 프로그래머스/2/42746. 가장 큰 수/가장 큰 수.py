@@ -33,3 +33,6 @@ def solution(numbers):
         return '0'
     
     return answer
+
+    # return str(int(''.join(numbers)))
+    # int해주면 0000을 0으로 변환, 그리고 다시 str()로 문자열로 변환
